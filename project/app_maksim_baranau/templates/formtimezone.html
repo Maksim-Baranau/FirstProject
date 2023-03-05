@@ -1,0 +1,11 @@
+<form method = "GET">
+    {{ form }}
+    <input type = "submit" value = "Submit">
+</form>
+<body>
+<h1>Время в текущем часовом поясе: {{ time_now }}</h1>
+Время в выбранном регионе ({{tz_city}}) - {{ result }}
+<p> Разница с текущим местоположением равна {{ raznica }} часов </p>
+<p><a href="/">Вернуться на главную</a></p>
+</body>
+
