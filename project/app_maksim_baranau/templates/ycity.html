@@ -1,0 +1,26 @@
+{% block content %}
+
+<div class="container">
+    <h1>Города</h1>
+
+    {% if object_list %}
+    <ul>
+        {% for city in object_list %}
+        <li> <a href="/ycity/{{ city.pk }}/">{{city.name}}</a></li>
+
+
+
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="alert alert-light" role="alert">
+        Городов еще нет ещё нет.
+    </div>
+    {% endif %}
+
+    <hr>
+        <form action="/ycity/create/" method="get">
+        <button class="search" type="submit">Добавить город</button>
+</div>
+
+{% endblock content %}

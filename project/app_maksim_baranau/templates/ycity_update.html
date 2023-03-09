@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение города</title>
+</head>
+<body>
+
+<form action="/ycity/" method="post">
+    {% csrf_token %}
+    {{ form.name.label }}{{ form.name }}
+    {{ form.about.label }}{{ form.about }}
+    {{ form.age.label }}{{ form.age }}
+
+    <button type="submit">Сохранить изменения</button>
+</form>
+
+</body>
+</html>
