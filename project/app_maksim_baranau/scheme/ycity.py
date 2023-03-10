@@ -5,3 +5,4 @@ class ycitySchema(BaseModel):
     name: str
     about: str
     age: int
+    img: str

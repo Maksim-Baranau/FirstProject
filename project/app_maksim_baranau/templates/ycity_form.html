@@ -5,12 +5,10 @@
     <title>Страница добавления города</title>
 </head>
 <body>
- <form method="post">
+    <form method = "post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <p>
-            <button class="btn btn-primary" type="submit">Добавить</button>
-        </p>
+        <button type="submit">Upload</button>
     </form>
 </body>
 </html>

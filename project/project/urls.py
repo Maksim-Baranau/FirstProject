@@ -17,8 +17,6 @@ urlpatterns = [
     path("ycity/<int:pk>/update/", views.ycityUpdate.as_view()),
     path("ycity/<int:pk>/del/", views.ycityDel.as_view()),
     path('image_upload/', views.upload_image_view, name ='image_upload'),
-    path('success/', views.success, name = 'success'),
-    path('hotel_images/', views.display_hotel_images, name = 'hotel_images'),
 ]
 
 if settings.DEBUG:

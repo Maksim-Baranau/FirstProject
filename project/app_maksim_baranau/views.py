@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.views import generic
 from .city import ZoneForm
 from .city import ZoneFormUSA
-from .forms import HotelForm
 
 
 from django.http import HttpResponse
@@ -10,7 +9,7 @@ from django.http import HttpRequest
 import pytz
 import datetime
 import time
-from .models import ycity, Hotel
+from .models import ycity
 from django import forms
 from .bob import usecases
 from .scheme.ycity import ycitySchema
@@ -73,9 +72,11 @@ def pomodoro(request: HttpRequest) -> HttpResponse:
     return render(request, "pomodoro.html", context)
 
 class ycityForm(forms.Form):
-    name = forms.CharField(label="Название города:")
-    about = forms.CharField(label="О городе:")
-    age = forms.IntegerField(label="Дата основания:")
+    model = ycity
+    name = forms.CharField(label="Имя:")
+    about = forms.CharField(label="Фамилия:")
+    age = forms.IntegerField(label="Возраст:")
+    img = forms.ImageField(label='Photo')
 
 
 class ycityView(generic.FormView):
@@ -111,7 +112,7 @@ class ycityDetail(generic.DetailView):
 
 class ycityUpdate(generic.UpdateView):
     template_name = "ycity_update.html"
-    fields = "__all__"
+    fields = ["name", "about", "age"]
     model = ycity
 
     def get_success_url(self) -> str:
@@ -125,21 +126,11 @@ class ycityDel(generic.DeleteView):
 
 def upload_image_view(request):
     if request.method == 'POST':
-        form = HotelForm(request.POST, request.FILES)
+        form = ycity(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
             return redirect('success')
     else:
-        form = HotelForm()
-    return render(request, 'hotel_image_form.html', {'form': form})
-
-
-def success(request):
-    return HttpResponse('successfully uploaded')
-
-
-def display_hotel_images(request):
-    if request.method == 'GET':
-        Hotels = Hotel.objects.all()
-        return render(request,"display_hotel_images.html",{'hotel_images': Hotels})
+        form = ycityForm()
+    return render(request, 'ycity_detail.html', {'form': form})
