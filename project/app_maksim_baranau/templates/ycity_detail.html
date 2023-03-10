@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.name }}</title>
+</head>
+<body>
+<h1>{{ object.name }}</h1>
+<a href="/ycity/{{ object.pk }}/update/">Редактировать</a>
+<p>О городе: {{ object.about }}</p>
+<p>Возраст(лет): {{object.age}}</p>
+        <form action="/ycity/{{ object.pk }}/del/" method="get">
+        <button class="search" type="submit">Удалить город</button>
+
+<p><a href="/ycity/">На главную</a></p>
+<img src="{{ ycity.img.url }}" class="img-responsive" style="width: 50%; float: left; margin-right: 10px;" />
+
+</body>
+</html>

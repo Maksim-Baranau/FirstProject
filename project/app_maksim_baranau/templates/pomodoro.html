@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
 </head>
 <body>
-
+<form method="post" >
+    {%  csrf_token %}
+    О чем напомнить: <input type="text" name="rem" value="{{rem}}">
+    Через сколько минут: <input type="text" name="when" value="{{when}}">
+<button type="submit">Start </button>
+    <h1>{{remember}}</h1>
+    <h1>{{time_now}}</h1>
 </body>
 </html>
