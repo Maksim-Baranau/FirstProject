@@ -1,0 +1,14 @@
+<html>
+<head>
+</head>
+<body>
+
+<form action="/wiki/" method="post">
+    {%  csrf_token %}
+    Город: <input type="text" name="i" value="{{i}}">
+<button type="submit">Узнать больше</button>
+</form>
+{{result}}
+<a href="/">Вернуться на главную</a><br>
+</body>
+</html>

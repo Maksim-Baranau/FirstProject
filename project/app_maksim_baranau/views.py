@@ -9,6 +9,7 @@ from django.http import HttpRequest
 import pytz
 import datetime
 import time
+import wikipedia, re
 from .models import ycity
 from django import forms
 from .bob import usecases
@@ -27,6 +28,8 @@ def TimeView_EUR(request: HttpRequest) -> HttpResponse:
     context['form'] = form
     time_now = datetime.datetime.now()
     context['time_now'] = time_now.strftime("%H:%M:%S")
+    wiki = str()
+    context['wiki'] = wiki
     if request.GET:
         temp = request.GET['region']
         tz_city = pytz.timezone(temp)
@@ -36,6 +39,29 @@ def TimeView_EUR(request: HttpRequest) -> HttpResponse:
         context['result'] = result
         raznica = time_now.hour - res.hour
         context['raznica'] = raznica
+        try:
+            temp = temp.split("/")
+            #wikipedia.set_lang("ru")
+            ny = wikipedia.page(temp[1])
+            wikitext = ny.content[:1000]
+            wikimas = wikitext.split('.')
+            wikimas = wikimas[:-1]
+            wikitext2 = ''
+            for x in wikimas:
+                if not ('==' in x):
+                    if (len((x.strip())) > 3):
+                        wikitext2 = wikitext2 + x + '.'
+                else:
+                    break
+            wikitext2 = re.sub('\([^()]*\)', '', wikitext2)
+            wikitext2 = re.sub('\([^()]*\)', '', wikitext2)
+            wikitext2 = re.sub('\{[^\{\}]*\}', '', wikitext2)
+            wiki = wikitext2
+            context['wiki'] = wiki
+        except Exception:
+            wiki = "No info"
+            context['wiki'] = wiki
+            return render(request, "formtimezone.html",context)
     return render(request, "formtimezone.html", context)
 
 def TimeView_US(request: HttpRequest) -> HttpResponse:
