@@ -209,3 +209,12 @@ class ProfileDetailsView(LoginRequiredMixin, generic.DetailView):
 
     def get_object(self, queryset: Any = None) -> Any:
         return usecases.GetProfileUseCase(user=self.request.user)()
+
+class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+    fields = ["bio"]
+    model = Profile
+    template_name = "profile_update.html"
+    success_url = "/ycity/profile/"
+
+    def get_object(self, queryset: Any = None) -> Any:
+        return usecases.GetProfileUseCase(user=self.request.user)()

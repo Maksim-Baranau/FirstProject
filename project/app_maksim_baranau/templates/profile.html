@@ -1,17 +1,15 @@
-{% extends "base.html" %}
 
-{% block title %}Profile{% endblock title %}
 
 {% block content %}
 
 <div class="container">
-    <h1>{{ request.user.name }}</h1>
+    <h1>Ваш профиль, {{ request.user }}</h1>
     <p>
-        <a href="/profile/update/">Update</a>
+        <a href="/ycity/profile/update/">Update</a>
     </p>
 
     <ul>
-        <li>Preferences: {{ object.name }}</li>
+        <li>Preferences: {{ object.bio }}</li>
     </ul>
 
 </div>

@@ -19,7 +19,8 @@ urlpatterns = [
     path('image_upload/', views.upload_image_view, name ='image_upload'),
     path("register/", views.RegisterUser.as_view(), name="reg"),
     path("ycity/login/", views.LoginView.as_view(), name="login"),
-    path("profile/", views.ProfileDetailsView.as_view(), name="profile"),
+    path("ycity/profile/", views.ProfileDetailsView.as_view(), name="profile"),
+    path("ycity/profile/update/", views.ProfileUpdateView.as_view(), name="profile"),
 ]
 
 if settings.DEBUG:
